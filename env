@@ -31,7 +31,7 @@
 #--------------------------------------------------------------------
 
 database.default.hostname = localhost
-database.default.database = kuberanfoods
+database.default.database = kuberanfoodz
 database.default.username = root
 database.default.password = Root1404@99
 database.default.DBDriver = MySQLi
