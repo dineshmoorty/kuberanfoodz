@@ -28,38 +28,86 @@
     </div>
   <?php endif; ?>
 
-  <!-- Desktop / larger screens: Table -->
-  <div class="table-responsive d-none d-md-block">
-    <table class="table table-bordered table-hover align-middle">
-      <thead class="table-light">
-        <tr>
-          <th>ID</th>
-          <th>Logo</th>
-          <th>Company Name</th>
-          <th>Phone</th>
-          <th>Email</th>
-          <th>Address</th>
-          <th class="text-center">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php foreach ($companies as $company): ?>
+  <?php if (!empty($companies)): ?>
+
+    <!-- Desktop / larger screens: Table -->
+    <div class="table-responsive d-none d-md-block">
+      <table class="table table-bordered table-hover align-middle">
+        <thead class="table-light">
           <tr>
-            <td><?= esc($company['id']) ?></td>
-            <td class="text-center">
-              <?php if (!empty($company['company_logo'])): ?>
-                <img src="<?= esc($company['company_logo']) ?>" alt="Logo" class="img-fluid" style="max-height:40px;" />
-              <?php else: ?>
-                <span class="text-muted">—</span>
-              <?php endif; ?>
-            </td>
-            <td><?= esc($company['company_name']) ?></td>
-            <td><?= esc($company['company_phone']) ?></td>
-            <td><?= esc($company['company_email']) ?></td>
-            <td><?= esc($company['company_address']) ?></td>
-            <td class="text-center">
-              <button type="button" class="btn btn-sm btn-primary me-1" data-bs-toggle="modal" data-bs-target="#companyEditModal"
-                data-id="<?= esc($company['id']) ?>" data-company_name="<?= esc($company['company_name']) ?>"
+            <th>ID</th>
+            <th>Logo</th>
+            <th>Company Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($companies as $company): ?>
+            <tr>
+              <td><?= esc($company['id']) ?></td>
+              <td class="text-center">
+                <?php if (!empty($company['company_logo'])): ?>
+                  <img src="<?= esc($company['company_logo']) ?>" alt="Logo" class="img-fluid" style="max-height:40px;" />
+                <?php else: ?>
+                  <span class="text-muted">—</span>
+                <?php endif; ?>
+              </td>
+              <td><?= esc($company['company_name']) ?></td>
+              <td><?= esc($company['company_phone']) ?></td>
+              <td><?= esc($company['company_email']) ?></td>
+              <td><?= esc($company['company_address']) ?></td>
+              <td class="text-center">
+                <button type="button" class="btn btn-sm btn-primary me-1" data-bs-toggle="modal" data-bs-target="#companyEditModal"
+                  data-id="<?= esc($company['id']) ?>" data-company_name="<?= esc($company['company_name']) ?>"
+                  data-company_phone="<?= esc($company['company_phone']) ?>"
+                  data-company_email="<?= esc($company['company_email']) ?>"
+                  data-company_address="<?= esc($company['company_address']) ?>"
+                  data-company_fssai="<?= esc($company['company_fssai']) ?>"
+                  data-company_logo="<?= esc($company['company_logo']) ?>"
+                  data-company_gst="<?= esc($company['company_gst']) ?>"
+                  data-swiggy="<?= esc($company['swiggy']) ?>"
+                  data-zomato="<?= esc($company['zomato']) ?>"
+                  data-whatsapp_group="<?= esc($company['whatsapp_group']) ?>">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <form action="/admin/settings/delete/<?= esc($company['id']) ?>" method="post" class="d-inline" onsubmit="return confirm('Delete this record?');">
+                  <?= csrf_field() ?>
+                  <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+                </form>
+              </td>
+            </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Mobile / small screens: Cards -->
+    <div class="d-block d-md-none">
+      <?php foreach ($companies as $company): ?>
+        <div class="card mb-3">
+          <div class="card-body">
+            <?php if (!empty($company['company_logo'])): ?>
+              <div class="mb-3 text-center">
+                <img src="<?= esc($company['company_logo']) ?>" alt="Logo" class="img-fluid" style="max-height:60px;">
+              </div>
+            <?php endif; ?>
+            <h5 class="card-title mb-1"><?= esc($company['id']) ?> - <?= esc($company['company_name']) ?></h5>
+            <p class="card-text mb-1">
+              <strong>Phone:</strong> <?= esc($company['company_phone']) ?><br>
+              <strong>Email:</strong> <?= esc($company['company_email']) ?><br>
+              <strong>Address:</strong> <?= esc($company['company_address']) ?>
+            </p>
+            <div class="d-flex gap-2">
+              <button
+                type="button"
+                class="btn btn-sm btn-primary me-1"
+                data-bs-toggle="modal"
+                data-bs-target="#companyEditModal"
+                data-id="<?= esc($company['id']) ?>"
+                data-company_name="<?= esc($company['company_name']) ?>"
                 data-company_phone="<?= esc($company['company_phone']) ?>"
                 data-company_email="<?= esc($company['company_email']) ?>"
                 data-company_address="<?= esc($company['company_address']) ?>"
@@ -71,61 +119,20 @@
                 data-whatsapp_group="<?= esc($company['whatsapp_group']) ?>">
                 <i class="bi bi-pencil"></i>
               </button>
-              <form action="/admin/settings/delete/<?= esc($company['id']) ?>" method="post" class="d-inline" onsubmit="return confirm('Delete this record?');">
+              <form action="/admin/settings/delete/<?= esc($company['id']) ?>" method="post" class="flex-fill" onsubmit="return confirm('Delete this record?');">
                 <?= csrf_field() ?>
                 <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
               </form>
-            </td>
-          </tr>
-        <?php endforeach; ?>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- Mobile / small screens: Cards -->
-  <div class="d-block d-md-none">
-    <?php foreach ($companies as $company): ?>
-      <div class="card mb-3">
-        <div class="card-body">
-          <?php if (!empty($company['company_logo'])): ?>
-            <div class="mb-3 text-center">
-              <img src="<?= esc($company['company_logo']) ?>" alt="Logo" class="img-fluid" style="max-height:60px;">
             </div>
-          <?php endif; ?>
-          <h5 class="card-title mb-1"><?= esc($company['id']) ?> - <?= esc($company['company_name']) ?></h5>
-          <p class="card-text mb-1">
-            <strong>Phone:</strong> <?= esc($company['company_phone']) ?><br>
-            <strong>Email:</strong> <?= esc($company['company_email']) ?><br>
-            <strong>Address:</strong> <?= esc($company['company_address']) ?>
-          </p>
-          <div class="d-flex gap-2">
-            <button
-              type="button"
-              class="btn btn-sm btn-primary me-1"
-              data-bs-toggle="modal"
-              data-bs-target="#companyEditModal"
-              data-id="<?= esc($company['id']) ?>"
-              data-company_name="<?= esc($company['company_name']) ?>"
-              data-company_phone="<?= esc($company['company_phone']) ?>"
-              data-company_email="<?= esc($company['company_email']) ?>"
-              data-company_address="<?= esc($company['company_address']) ?>"
-              data-company_fssai="<?= esc($company['company_fssai']) ?>"
-              data-company_logo="<?= esc($company['company_logo']) ?>"
-              data-company_gst="<?= esc($company['company_gst']) ?>"
-              data-swiggy="<?= esc($company['swiggy']) ?>"
-              data-zomato="<?= esc($company['zomato']) ?>"
-              data-whatsapp_group="<?= esc($company['whatsapp_group']) ?>">
-              <i class="bi bi-pencil"></i>
-            </button>
-            <form action="/admin/settings/delete/<?= esc($company['id']) ?>" method="post" class="flex-fill" onsubmit="return confirm('Delete this record?');">
-              <?= csrf_field() ?>
-              <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
-            </form>
           </div>
         </div>
-      </div>
-    <?php endforeach; ?>
-  </div>
+      <?php endforeach; ?>
+    </div>
+  <?php else: ?>
+    <div class="alert alert-info mt-3" role="alert">
+      No company settings found. Click "Add New Company" to create one.
+    </div>
+  <?php endif; ?>
 
 </div>
 
