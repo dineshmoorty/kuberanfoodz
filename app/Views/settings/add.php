@@ -2,12 +2,9 @@
 <?= view('/partials/adminsidebar') ?>
 
 <div class="container-fluid">
-  <div class="row mt-4">
-    <div class="col-12 d-flex justify-content-between align-items-center">
-      <h1>Add Company Settings</h1>
-      <a href="/admin/settings" class="btn btn-secondary">Back to List</a>
-    </div>
-  </div>
+
+  <h1>Add Company Settings</h1>
+  <a href="/admin/settings" class="btn btn-secondary flex-end">Back to List</a>
 
   <?php if (session()->getFlashdata('error')): ?>
     <div class="alert alert-danger mt-3" role="alert">
@@ -25,8 +22,8 @@
     </div>
   <?php endif; ?>
 
-  <div class="row">
-    <div class="col-12 col-lg-8">
+  <div class="row mb-5">
+    <div class="col-12 mt-3 mb-5">
       <div class="card mt-3">
         <div class="card-body">
           <form action="/admin/settings/create" method="post" enctype="multipart/form-data">
@@ -73,19 +70,17 @@
                 <label for="zomato" class="form-label">Zomato Link</label>
                 <input type="url" class="form-control" id="zomato" name="zomato" value="<?= esc(old('zomato')) ?>">
               </div>
+              <div class="col-md-6 mb-3">
+                <label for="whatsapp_group" class="form-label">WhatsApp Group Link</label>
+                <input type="url" class="form-control" id="whatsapp_group" name="whatsapp_group" value="<?= esc(old('whatsapp_group')) ?>">
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="company_logo" class="form-label">Company Logo</label>
+                <input type="file" class="form-control" id="company_logo" name="company_logo" accept="image/*">
+                <div class="form-text">Accepted formats: jpg/jpeg/png/svg (max 2MB).</div>
+              </div>
             </div>
-
-            <div class="mb-3">
-              <label for="whatsapp_group" class="form-label">WhatsApp Group Link</label>
-              <input type="url" class="form-control" id="whatsapp_group" name="whatsapp_group" value="<?= esc(old('whatsapp_group')) ?>">
-            </div>
-
-            <div class="mb-3">
-              <label for="company_logo" class="form-label">Company Logo</label>
-              <input type="file" class="form-control" id="company_logo" name="company_logo" accept="image/*">
-              <div class="form-text">Accepted formats: jpg/jpeg/png/svg (max 2MB).</div>
-            </div>
-
+            
             <div class="d-flex gap-2">
               <button type="submit" class="btn btn-primary">Create</button>
               <a href="/admin/settings" class="btn btn-outline-secondary">Cancel</a>

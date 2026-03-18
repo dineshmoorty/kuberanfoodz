@@ -1,9 +1,8 @@
 <?= view('/partials/adminheader') ?>
 <?= view('/partials/adminsidebar') ?>
-<div class="container-fluid">
-  <div class="d-flex justify-content-between align-items-center mt-4">
-    <h1 class="mb-0">Company Settings</h1>
-    <a href="/admin/settings/add" class="btn btn-success">Add New Company</a>
+  <div class="container">
+    <h1 class="mt-2 mb-2">Company Settings</h1>
+    <a href="/admin/settings/add" class="btn btn-success mt-2 mb-2">Add New Company</a>
   </div>
 
   <?php if (session()->getFlashdata('success')): ?>
@@ -40,13 +39,6 @@
           <th>Phone</th>
           <th>Email</th>
           <th>Address</th>
-          <th>FSSAI</th>
-          <th>GST</th>
-          <th>Swiggy</th>
-          <th>Zomato</th>
-          <th>WhatsApp</th>
-          <th>Created</th>
-          <th>Updated</th>
           <th class="text-center">Actions</th>
         </tr>
       </thead>
@@ -65,21 +57,9 @@
             <td><?= esc($company['company_phone']) ?></td>
             <td><?= esc($company['company_email']) ?></td>
             <td><?= esc($company['company_address']) ?></td>
-            <td><?= esc($company['company_fssai']) ?></td>
-            <td><?= esc($company['company_gst']) ?></td>
-            <td><a href="<?= esc($company['swiggy']) ?>" target="_blank" rel="noopener" class="text-decoration-none"><?= esc($company['swiggy']) ?></a></td>
-            <td><a href="<?= esc($company['zomato']) ?>" target="_blank" rel="noopener" class="text-decoration-none"><?= esc($company['zomato']) ?></a></td>
-            <td><a href="<?= esc($company['whatsapp_group']) ?>" target="_blank" rel="noopener" class="text-decoration-none"><?= esc($company['whatsapp_group']) ?></a></td>
-            <td><?= esc($company['created_at']) ?></td>
-            <td><?= esc($company['updated_at']) ?></td>
             <td class="text-center">
-              <button
-                type="button"
-                class="btn btn-sm btn-primary me-1"
-                data-bs-toggle="modal"
-                data-bs-target="#companyEditModal"
-                data-id="<?= esc($company['id']) ?>"
-                data-company_name="<?= esc($company['company_name']) ?>"
+              <button type="button" class="btn btn-sm btn-primary me-1" data-bs-toggle="modal" data-bs-target="#companyEditModal"
+                data-id="<?= esc($company['id']) ?>" data-company_name="<?= esc($company['company_name']) ?>"
                 data-company_phone="<?= esc($company['company_phone']) ?>"
                 data-company_email="<?= esc($company['company_email']) ?>"
                 data-company_address="<?= esc($company['company_address']) ?>"
@@ -89,11 +69,11 @@
                 data-swiggy="<?= esc($company['swiggy']) ?>"
                 data-zomato="<?= esc($company['zomato']) ?>"
                 data-whatsapp_group="<?= esc($company['whatsapp_group']) ?>">
-                Edit
+                <i class="bi bi-pencil"></i>
               </button>
               <form action="/admin/settings/delete/<?= esc($company['id']) ?>" method="post" class="d-inline" onsubmit="return confirm('Delete this record?');">
                 <?= csrf_field() ?>
-                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
               </form>
             </td>
           </tr>
@@ -112,25 +92,11 @@
               <img src="<?= esc($company['company_logo']) ?>" alt="Logo" class="img-fluid" style="max-height:60px;">
             </div>
           <?php endif; ?>
-          <h5 class="card-title mb-1"><?= esc($company['company_name']) ?> <small class="text-muted">#<?= esc($company['id']) ?></small></h5>
+          <h5 class="card-title mb-1"><?= esc($company['id']) ?> - <?= esc($company['company_name']) ?></h5>
           <p class="card-text mb-1">
             <strong>Phone:</strong> <?= esc($company['company_phone']) ?><br>
             <strong>Email:</strong> <?= esc($company['company_email']) ?><br>
             <strong>Address:</strong> <?= esc($company['company_address']) ?>
-          </p>
-          <p class="card-text mb-1">
-            <strong>FSSAI:</strong> <?= esc($company['company_fssai']) ?>
-            <br><strong>GST:</strong> <?= esc($company['company_gst']) ?>
-          </p>
-          <p class="card-text mb-2">
-            <strong>Swiggy:</strong> <a href="<?= esc($company['swiggy']) ?>" target="_blank" rel="noopener"><?= esc($company['swiggy']) ?></a><br>
-            <strong>Zomato:</strong> <a href="<?= esc($company['zomato']) ?>" target="_blank" rel="noopener"><?= esc($company['zomato']) ?></a><br>
-            <strong>WhatsApp:</strong> <a href="<?= esc($company['whatsapp_group']) ?>" target="_blank" rel="noopener"><?= esc($company['whatsapp_group']) ?></a>
-          </p>
-          <p class="card-text text-muted small mb-2">
-            Created: <?= esc($company['created_at']) ?>
-            <br>
-            Updated: <?= esc($company['updated_at']) ?>
           </p>
           <div class="d-flex gap-2">
             <button
@@ -149,11 +115,11 @@
               data-swiggy="<?= esc($company['swiggy']) ?>"
               data-zomato="<?= esc($company['zomato']) ?>"
               data-whatsapp_group="<?= esc($company['whatsapp_group']) ?>">
-              Edit
+              <i class="bi bi-pencil"></i>
             </button>
             <form action="/admin/settings/delete/<?= esc($company['id']) ?>" method="post" class="flex-fill" onsubmit="return confirm('Delete this record?');">
               <?= csrf_field() ?>
-              <button type="submit" class="btn btn-sm btn-danger w-100">Delete</button>
+              <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
             </form>
           </div>
         </div>
