@@ -10,9 +10,20 @@ $routes->get('/', 'Home::index');
 // Auth Login
 $routes->get('/admin/login', 'Auth::adminLogin');
 $routes->post('/admin/login', 'Auth::adminAuthenticate');
+$routes->get('/admin/profile', 'Auth::profile');
+$routes->get('/admin/profiles', 'Auth::profile');
+$routes->post('/admin/profiles/create', 'Auth::createProfile');
+$routes->post('/admin/profiles/update/(:num)', 'Auth::updateProfile/$1');
+$routes->post('/admin/profiles/delete/(:num)', 'Auth::deleteProfile/$1');
+$routes->get('/admin/roles', 'Roles::list');
+$routes->post('/admin/roles/create', 'Roles::create');
+$routes->post('/admin/roles/update/(:num)', 'Roles::update/$1');
+$routes->post('/admin/roles/delete/(:num)', 'Roles::delete/$1');
 $routes->get('/admin/logout', 'Auth::logout');
 
 $routes->get('/admin/dashboard', 'Dashboard::index');
+$routes->get('/sub-admin/dashboard', 'SubAdminDashboard::index');
+$routes->get('/manager/dashboard', 'ManagerDashboard::index');
 
 // Company settings
 $routes->get('/admin/settings', 'Settings::list');

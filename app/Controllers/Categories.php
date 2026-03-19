@@ -9,11 +9,7 @@ class Categories extends BaseController
 {
   protected function requireAdmin()
   {
-    if (!session()->get('admin')) {
-      return redirect()->to('/admin/login')->with('error', 'Please login to access categories');
-    }
-
-    return null;
+    return $this->requireAdminAccess('Only admin can manage categories');
   }
 
   public function list()

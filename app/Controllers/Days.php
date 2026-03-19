@@ -10,11 +10,7 @@ class Days extends BaseController
 {
   protected function requireAdmin()
   {
-    if (!session()->get('admin')) {
-      return redirect()->to('/admin/login')->with('error', 'Please login to access the days management');
-    }
-
-    return null;
+    return $this->requireAdminAccess('Only admin can manage days');
   }
 
   protected function loadCompanyName(): string

@@ -57,4 +57,35 @@ abstract class BaseController extends Controller
             'company_logo' => $companyLogo,
         ]);
     }
+
+    protected function dashboardPathForRole(?string $role): string
+    {
+        return match ($role) {
+            'sub-admin' => '/sub-admin/dashboard',
+            'manager' => '/manager/dashboard',
+            default => '/admin/dashboard',
+        };
+    }
+
+    protected function requireAuthenticated(string $message = 'Please login to continue')
+    {
+        if (!session()->get('admin')) {
+            return redirect()->to('/admin/login')->with('error', $message);
+        }
+
+        return null;
+    }
+
+    protected function requireAdminAccess(string $message = 'You do not have permission to access this page')
+    {
+        if ($redirect = $this->requireAuthenticated()) {
+            return $redirect;
+        }
+
+        if (session()->get('admin_role') !== 'admin') {
+            return redirect()->to($this->dashboardPathForRole((string) session()->get('admin_role')))->with('error', $message);
+        }
+
+        return null;
+    }
 }

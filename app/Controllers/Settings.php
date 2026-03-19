@@ -9,11 +9,7 @@ class Settings extends BaseController
 {
     protected function requireAdmin()
     {
-        if (!session()->get('admin')) {
-            return redirect()->to('/admin/login')->with('error', 'Please login to access the settings');
-        }
-
-        return null;
+        return $this->requireAdminAccess('Only admin can access settings');
     }
 
     protected function loadCompanyName(): string
