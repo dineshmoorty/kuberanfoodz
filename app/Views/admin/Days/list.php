@@ -25,10 +25,8 @@
             <tr>
               <td><?= esc($day['id']) ?></td>
               <td><?= esc($day['day_name']) ?></td>
-              <td class="text-center">
-                <button
-                  type="button"
-                  class="btn btn-sm btn-primary me-1 edit-day-btn"
+              <td class="d-flex justify-content-center gap-2">
+                <button type="button" class="btn btn-sm btn-primary me-1 edit-day-btn"
                   data-id="<?= esc($day['id']) ?>"
                   data-day_name="<?= esc($day['day_name']) ?>"
                   data-bs-toggle="modal"

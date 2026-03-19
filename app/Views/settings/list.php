@@ -36,7 +36,7 @@
             <td><?= esc($company['company_phone']) ?></td>
             <td><?= esc($company['company_email']) ?></td>
             <td><?= esc($company['company_address']) ?></td>
-            <td class="text-center">
+            <td class="d-flex justify-content-center gap-2">
               <button type="button" class="btn btn-sm btn-primary me-1" data-bs-toggle="modal" data-bs-target="#companyEditModal"
                 data-id="<?= esc($company['id']) ?>" data-company_name="<?= esc($company['company_name']) ?>"
                 data-company_phone="<?= esc($company['company_phone']) ?>"
