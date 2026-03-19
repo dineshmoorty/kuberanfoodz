@@ -6,22 +6,6 @@
   <h1>Add Company Settings</h1>
   <a href="/admin/settings" class="btn btn-secondary flex-end">Back to List</a>
 
-  <?php if (session()->getFlashdata('error')): ?>
-    <div class="alert alert-danger mt-3" role="alert">
-      <?= esc(session()->getFlashdata('error')) ?>
-    </div>
-  <?php endif; ?>
-
-  <?php if (isset($validation) && $validation->getErrors()): ?>
-    <div class="alert alert-danger mt-3">
-      <ul class="mb-0">
-        <?php foreach ($validation->getErrors() as $error): ?>
-          <li><?= esc($error) ?></li>
-        <?php endforeach; ?>
-      </ul>
-    </div>
-  <?php endif; ?>
-
   <div class="row mb-5">
     <div class="col-12 mt-3 mb-5">
       <div class="card mt-3">
@@ -80,7 +64,7 @@
                 <div class="form-text">Accepted formats: jpg/jpeg/png/svg (max 2MB).</div>
               </div>
             </div>
-            
+
             <div class="d-flex gap-2">
               <button type="submit" class="btn btn-primary">Create</button>
               <a href="/admin/settings" class="btn btn-outline-secondary">Cancel</a>

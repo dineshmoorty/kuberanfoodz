@@ -1,0 +1,116 @@
+<?php
+
+namespace App\Controllers;
+
+use App\Controllers\BaseController;
+use App\Models\Day;
+use App\Models\CompanySetting;
+
+class Days extends BaseController
+{
+  protected function requireAdmin()
+  {
+    if (!session()->get('admin')) {
+      return redirect()->to('/admin/login')->with('error', 'Please login to access the days management');
+    }
+
+    return null;
+  }
+
+  protected function loadCompanyName(): string
+  {
+    $model = new CompanySetting();
+    $companySettings = $model->orderBy('id', 'ASC')->first();
+
+    return $companySettings['company_name'] ?? 'Kuberan Foods Admin';
+  }
+
+  public function list()
+  {
+    if ($redirect = $this->requireAdmin()) {
+      return $redirect;
+    }
+
+    $model = new Day();
+    $days = $model->orderBy('id', 'ASC')->findAll();
+
+    return view('/admin/Days/list', [
+      'days' => $days,
+      'company_name' => $this->loadCompanyName(),
+    ]);
+  }
+
+  public function create()
+  {
+    if ($redirect = $this->requireAdmin()) {
+      return $redirect;
+    }
+
+    $rules = [
+      'day_name' => 'required|max_length[50]',
+    ];
+
+    if (!$this->validate($rules)) {
+      return redirect()->back()->withInput()->with('validation', $this->validator);
+    }
+
+    $dayName = trim($this->request->getPost('day_name'));
+
+    $model = new Day();
+    if ($model->where('day_name', $dayName)->first()) {
+      return redirect()->back()->withInput()->with('validation', $this->validator->setError('day_name', 'Day already exists.'));
+    }
+
+    $model->insert(['day_name' => $dayName]);
+
+    return redirect()->to('/admin/days')->with('success', 'Day added successfully');
+  }
+
+  public function update($id)
+  {
+    if ($redirect = $this->requireAdmin()) {
+      return $redirect;
+    }
+
+    $model = new Day();
+    $day = $model->find($id);
+    if (!$day) {
+      return redirect()->to('/admin/days')->with('error', 'Day record not found');
+    }
+
+    $rules = [
+      'day_name' => 'required|max_length[50]',
+    ];
+
+    if (!$this->validate($rules)) {
+      return redirect()->back()->withInput()->with('validation', $this->validator);
+    }
+
+    $dayName = trim($this->request->getPost('day_name'));
+
+    if ($model->where('day_name', $dayName)->where('id !=', $id)->first()) {
+      return redirect()->back()->withInput()->with('validation', $this->validator->setError('day_name', 'Day already exists.'));
+    }
+
+    $model->update($id, ['day_name' => $dayName]);
+
+    return redirect()->to('/admin/days')->with('success', 'Day updated successfully');
+  }
+
+  public function delete($id)
+  {
+    if ($redirect = $this->requireAdmin()) {
+      return $redirect;
+    }
+
+    $model = new Day();
+    $day = $model->find($id);
+    if (!$day) {
+      return redirect()->to('/admin/days')->with('error', 'Day record not found');
+    }
+
+    $model->delete($id);
+
+    return redirect()->to('/admin/days')->with('success', 'Day deleted successfully');
+  }
+}

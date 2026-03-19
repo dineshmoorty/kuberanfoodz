@@ -15,8 +15,8 @@
       <ul class="nav flex-column p-3">
         <li class="nav-item"><a class="nav-link <?= $isActive('admin/dashboard') ?>" href="/admin/dashboard"><i class="bi bi-speedometer2 me-1" aria-hidden="true"></i>Dashboard</a></li>
         <li class="nav-item"><a class="nav-link <?= $isActive('admin/menu') ?>" href="/admin/menu"><i class="bi bi-list-task me-1" aria-hidden="true"></i>Menu</a></li>
-        <li class="nav-item"><a class="nav-link <?= $isActive('admin/dishes') ?>" href="/admin/dishes"><i class="bi bi-calendar-day me-1" aria-hidden="true"></i>Days</a></li>
-        <li class="nav-item"><a class="nav-link <?= $isActive('admin/dishes') ?>" href="/admin/dishes"><i class="bi bi-tags me-1" aria-hidden="true"></i>Categories</a></li>
+        <li class="nav-item"><a class="nav-link <?= $isActive('admin/days') ?>" href="/admin/days"><i class="bi bi-calendar-day me-1" aria-hidden="true"></i>Days</a></li>
+        <li class="nav-item"><a class="nav-link <?= $isActive('admin/categories') ?>" href="/admin/categories"><i class="bi bi-tags me-1" aria-hidden="true"></i>Categories</a></li>
         <li class="nav-item"><a class="nav-link <?= $isActive('admin/dishes') ?>" href="/admin/dishes"><i class="bi bi-egg-fried me-1" aria-hidden="true"></i>Dishes</a></li>
         <li class="nav-item"><a class="nav-link <?= $isActive('admin/groceries') ?>" href="/admin/groceries"><i class="bi bi-cart3 me-1" aria-hidden="true"></i>Groceries</a></li>
         <li class="nav-item"><a class="nav-link <?= $isActive('admin/settings') ?>" href="/admin/settings"><i class="bi bi-gear me-1" aria-hidden="true"></i>Settings</a></li>

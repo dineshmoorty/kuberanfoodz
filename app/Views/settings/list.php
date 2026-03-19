@@ -1,113 +1,44 @@
 <?= view('/partials/adminheader') ?>
 <?= view('/partials/adminsidebar') ?>
-  <div class="container">
-    <h1 class="mt-2 mb-2">Company Settings</h1>
-    <a href="/admin/settings/add" class="btn btn-success mt-2 mb-2">Add New Company</a>
-  </div>
+<div class="container">
+  <h1 class="mt-2 mb-2">Company Settings</h1>
+  <a href="/admin/settings/add" class="btn btn-success mt-2 mb-2">Add New Company</a>
+</div>
 
-  <?php if (session()->getFlashdata('success')): ?>
-    <div class="alert alert-success mt-3" role="alert">
-      <?= esc(session()->getFlashdata('success')) ?>
-    </div>
-  <?php endif; ?>
-  <?php if (session()->getFlashdata('error')): ?>
-    <div class="alert alert-danger mt-3" role="alert">
-      <?= esc(session()->getFlashdata('error')) ?>
-    </div>
-  <?php endif; ?>
-  <?php
-  $validation = session()->getFlashdata('validation');
-  if ($validation && $validation->getErrors()):
-  ?>
-    <div class="alert alert-danger mt-3">
-      <ul class="mb-0">
-        <?php foreach ($validation->getErrors() as $error): ?>
-          <li><?= esc($error) ?></li>
-        <?php endforeach; ?>
-      </ul>
-    </div>
-  <?php endif; ?>
+<?php if (!empty($companies)): ?>
 
-  <?php if (!empty($companies)): ?>
-
-    <!-- Desktop / larger screens: Table -->
-    <div class="table-responsive d-none d-md-block">
-      <table class="table table-bordered table-hover align-middle">
-        <thead class="table-light">
+  <!-- Desktop / larger screens: Table -->
+  <div class="table-responsive d-none d-md-block">
+    <table class="table table-bordered table-hover align-middle">
+      <thead class="table-light">
+        <tr>
+          <th>ID</th>
+          <th>Logo</th>
+          <th>Company Name</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>Address</th>
+          <th class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($companies as $company): ?>
           <tr>
-            <th>ID</th>
-            <th>Logo</th>
-            <th>Company Name</th>
-            <th>Phone</th>
-            <th>Email</th>
-            <th>Address</th>
-            <th class="text-center">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php foreach ($companies as $company): ?>
-            <tr>
-              <td><?= esc($company['id']) ?></td>
-              <td class="text-center">
-                <?php if (!empty($company['company_logo'])): ?>
-                  <img src="<?= esc($company['company_logo']) ?>" alt="Logo" class="img-fluid" style="max-height:40px;" />
-                <?php else: ?>
-                  <span class="text-muted">—</span>
-                <?php endif; ?>
-              </td>
-              <td><?= esc($company['company_name']) ?></td>
-              <td><?= esc($company['company_phone']) ?></td>
-              <td><?= esc($company['company_email']) ?></td>
-              <td><?= esc($company['company_address']) ?></td>
-              <td class="text-center">
-                <button type="button" class="btn btn-sm btn-primary me-1" data-bs-toggle="modal" data-bs-target="#companyEditModal"
-                  data-id="<?= esc($company['id']) ?>" data-company_name="<?= esc($company['company_name']) ?>"
-                  data-company_phone="<?= esc($company['company_phone']) ?>"
-                  data-company_email="<?= esc($company['company_email']) ?>"
-                  data-company_address="<?= esc($company['company_address']) ?>"
-                  data-company_fssai="<?= esc($company['company_fssai']) ?>"
-                  data-company_logo="<?= esc($company['company_logo']) ?>"
-                  data-company_gst="<?= esc($company['company_gst']) ?>"
-                  data-swiggy="<?= esc($company['swiggy']) ?>"
-                  data-zomato="<?= esc($company['zomato']) ?>"
-                  data-whatsapp_group="<?= esc($company['whatsapp_group']) ?>">
-                  <i class="bi bi-pencil"></i>
-                </button>
-                <form action="/admin/settings/delete/<?= esc($company['id']) ?>" method="post" class="d-inline" onsubmit="return confirm('Delete this record?');">
-                  <?= csrf_field() ?>
-                  <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
-                </form>
-              </td>
-            </tr>
-          <?php endforeach; ?>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Mobile / small screens: Cards -->
-    <div class="d-block d-md-none">
-      <?php foreach ($companies as $company): ?>
-        <div class="card mb-3">
-          <div class="card-body">
-            <?php if (!empty($company['company_logo'])): ?>
-              <div class="mb-3 text-center">
-                <img src="<?= esc($company['company_logo']) ?>" alt="Logo" class="img-fluid" style="max-height:60px;">
-              </div>
-            <?php endif; ?>
-            <h5 class="card-title mb-1"><?= esc($company['id']) ?> - <?= esc($company['company_name']) ?></h5>
-            <p class="card-text mb-1">
-              <strong>Phone:</strong> <?= esc($company['company_phone']) ?><br>
-              <strong>Email:</strong> <?= esc($company['company_email']) ?><br>
-              <strong>Address:</strong> <?= esc($company['company_address']) ?>
-            </p>
-            <div class="d-flex gap-2">
-              <button
-                type="button"
-                class="btn btn-sm btn-primary me-1"
-                data-bs-toggle="modal"
-                data-bs-target="#companyEditModal"
-                data-id="<?= esc($company['id']) ?>"
-                data-company_name="<?= esc($company['company_name']) ?>"
+            <td><?= esc($company['id']) ?></td>
+            <td class="text-center">
+              <?php if (!empty($company['company_logo'])): ?>
+                <img src="<?= esc($company['company_logo']) ?>" alt="Logo" class="img-fluid" style="max-height:40px;" />
+              <?php else: ?>
+                <span class="text-muted">—</span>
+              <?php endif; ?>
+            </td>
+            <td><?= esc($company['company_name']) ?></td>
+            <td><?= esc($company['company_phone']) ?></td>
+            <td><?= esc($company['company_email']) ?></td>
+            <td><?= esc($company['company_address']) ?></td>
+            <td class="text-center">
+              <button type="button" class="btn btn-sm btn-primary me-1" data-bs-toggle="modal" data-bs-target="#companyEditModal"
+                data-id="<?= esc($company['id']) ?>" data-company_name="<?= esc($company['company_name']) ?>"
                 data-company_phone="<?= esc($company['company_phone']) ?>"
                 data-company_email="<?= esc($company['company_email']) ?>"
                 data-company_address="<?= esc($company['company_address']) ?>"
@@ -119,20 +50,66 @@
                 data-whatsapp_group="<?= esc($company['whatsapp_group']) ?>">
                 <i class="bi bi-pencil"></i>
               </button>
-              <form action="/admin/settings/delete/<?= esc($company['id']) ?>" method="post" class="flex-fill" onsubmit="return confirm('Delete this record?');">
+              <form action="/admin/settings/delete/<?= esc($company['id']) ?>" method="post" class="d-inline" onsubmit="return confirm('Delete this record?');">
                 <?= csrf_field() ?>
                 <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
               </form>
+            </td>
+          </tr>
+        <?php endforeach; ?>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Mobile / small screens: Cards -->
+  <div class="d-block d-md-none">
+    <?php foreach ($companies as $company): ?>
+      <div class="card mb-3">
+        <div class="card-body">
+          <?php if (!empty($company['company_logo'])): ?>
+            <div class="mb-3 text-center">
+              <img src="<?= esc($company['company_logo']) ?>" alt="Logo" class="img-fluid" style="max-height:60px;">
             </div>
+          <?php endif; ?>
+          <h5 class="card-title mb-1"><?= esc($company['id']) ?> - <?= esc($company['company_name']) ?></h5>
+          <p class="card-text mb-1">
+            <strong>Phone:</strong> <?= esc($company['company_phone']) ?><br>
+            <strong>Email:</strong> <?= esc($company['company_email']) ?><br>
+            <strong>Address:</strong> <?= esc($company['company_address']) ?>
+          </p>
+          <div class="d-flex gap-2">
+            <button
+              type="button"
+              class="btn btn-sm btn-primary me-1"
+              data-bs-toggle="modal"
+              data-bs-target="#companyEditModal"
+              data-id="<?= esc($company['id']) ?>"
+              data-company_name="<?= esc($company['company_name']) ?>"
+              data-company_phone="<?= esc($company['company_phone']) ?>"
+              data-company_email="<?= esc($company['company_email']) ?>"
+              data-company_address="<?= esc($company['company_address']) ?>"
+              data-company_fssai="<?= esc($company['company_fssai']) ?>"
+              data-company_logo="<?= esc($company['company_logo']) ?>"
+              data-company_gst="<?= esc($company['company_gst']) ?>"
+              data-swiggy="<?= esc($company['swiggy']) ?>"
+              data-zomato="<?= esc($company['zomato']) ?>"
+              data-whatsapp_group="<?= esc($company['whatsapp_group']) ?>">
+              <i class="bi bi-pencil"></i>
+            </button>
+            <form action="/admin/settings/delete/<?= esc($company['id']) ?>" method="post" class="flex-fill" onsubmit="return confirm('Delete this record?');">
+              <?= csrf_field() ?>
+              <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button>
+            </form>
           </div>
         </div>
-      <?php endforeach; ?>
-    </div>
-  <?php else: ?>
-    <div class="alert alert-info mt-3" role="alert">
-      No company settings found. Click "Add New Company" to create one.
-    </div>
-  <?php endif; ?>
+      </div>
+    <?php endforeach; ?>
+  </div>
+<?php else: ?>
+  <div class="alert alert-info mt-3" role="alert">
+    No company settings found. Click "Add New Company" to create one.
+  </div>
+<?php endif; ?>
 
 </div>
 
