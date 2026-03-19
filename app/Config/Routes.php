@@ -12,7 +12,7 @@ $routes->get('/admin/login', 'Auth::adminLogin');
 $routes->post('/admin/login', 'Auth::adminAuthenticate');
 $routes->get('/admin/logout', 'Auth::logout');
 
-$routes->get('/dashboard', 'Dashboard::index');
+$routes->get('/admin/dashboard', 'Dashboard::index');
 $routes->get('/admin/settings', 'Settings::list');
 $routes->get('/admin/settings/add', 'Settings::add');
 $routes->post('/admin/settings/create', 'Settings::create');
