@@ -27,3 +27,10 @@ $routes->get('/admin/days', 'Days::list');
 $routes->post('/admin/days/create', 'Days::create');
 $routes->post('/admin/days/update/(:num)', 'Days::update/$1');
 $routes->post('/admin/days/delete/(:num)', 'Days::delete/$1');
+
+// Categories management
+$routes->get('/admin/categories', 'Categories::list');
+$routes->post('/admin/categories/create', 'Categories::create');
+$routes->get('/admin/categories/edit/(:num)', 'Categories::edit/$1');
+$routes->post('/admin/categories/update/(:num)', 'Categories::update/$1');
+$routes->post('/admin/categories/delete/(:num)', 'Categories::delete/$1');

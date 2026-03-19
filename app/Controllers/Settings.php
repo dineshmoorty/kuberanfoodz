@@ -31,10 +31,10 @@ class Settings extends BaseController
         }
 
         $model = new CompanySetting();
-        $companySettings = $model->findAll();
+        $companySettings = $model->orderBy('id', 'ASC')->paginate(10);
         $data = [
             'companies' => $companySettings,
-            'company_name' => $this->loadCompanyName(),
+            'pager' => $model->pager,
         ];
 
         return view('/settings/list', $data);

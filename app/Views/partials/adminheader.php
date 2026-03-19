@@ -57,6 +57,30 @@
     .sidebar .nav-link.active {
       font-weight: 600;
     }
+
+    .pagination .page-item .page-link {
+      color: #ffffff;
+      background-color: #28a745;
+      border-color: #28a745;
+    }
+
+    .pagination .page-item.active .page-link,
+    .pagination .page-item .page-link:hover {
+      color: #ffffff;
+      background-color: #218838;
+      border-color: #1e7e34;
+    }
+
+    .pagination .page-item.disabled .page-link {
+      color: #e9ecef;
+      background-color: #ced4da;
+      border-color: #dee2e6;
+    }
+
+    .pagination {
+      margin: 0;
+      padding: 0;
+    }
   </style>
 </head>
 

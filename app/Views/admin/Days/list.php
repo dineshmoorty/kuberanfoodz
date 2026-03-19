@@ -48,6 +48,11 @@
       </tbody>
     </table>
   </div>
+  <?php if (isset($pager) && $pager->getPageCount() > 1): ?>
+    <div class="d-flex justify-content-end mt-3">
+      <?= $pager->links('default', 'bootstrap_pagination') ?>
+    </div>
+  <?php endif; ?>
 </div>
 
 <!-- Day Modal -->

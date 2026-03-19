@@ -29,25 +29,41 @@
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-    padding: 1rem;
+    padding: 1.25rem;
     border-radius: 1rem;
     background: rgba(255, 255, 255, 0.85);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
   }
 
+  #site-loader .loader-logo-wrapper {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #site-loader .loader-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 4px solid rgba(221, 72, 20, 0.22);
+    border-top-color: rgba(221, 72, 20, 0.7);
+    border-radius: 50%;
+    animation: site-loader-spin 1s linear infinite;
+  }
+
   #site-loader .loader-logo {
-    max-height: 70px;
+    max-height: 48px;
     width: auto;
-    display: block;
+    border-radius: 50%;
+    z-index: 1;
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.88);
   }
 
   #site-loader .loader-spinner {
-    width: 48px;
-    height: 48px;
-    border: 5px solid rgba(0, 0, 0, 0.1);
-    border-top-color: rgba(221, 72, 20, 1);
-    border-radius: 50%;
-    animation: site-loader-spin 1s linear infinite;
+    display: none;
   }
 
   @keyframes site-loader-spin {
@@ -59,12 +75,14 @@
 
 <div id="site-loader" aria-hidden="true">
   <div class="loader-inner">
-    <img
-      class="loader-logo"
-      src="<?= esc(isset($company_logo) && $company_logo ? $company_logo : (function_exists('base_url') ? base_url('/images/logo.png') : '/images/logo.png')) ?>"
-      alt="Loading..."
-      loading="lazy" />
-    <div class="loader-spinner" aria-hidden="true"></div>
+    <div class="loader-logo-wrapper">
+      <div class="loader-ring" aria-hidden="true"></div>
+      <img
+        class="loader-logo"
+        src="<?= esc(isset($company_logo) && $company_logo ? $company_logo : (function_exists('base_url') ? base_url('/images/logo.png') : '/images/logo.png')) ?>"
+        alt="Loading..."
+        loading="lazy" />
+    </div>
   </div>
 </div>
 
