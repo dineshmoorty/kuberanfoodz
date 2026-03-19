@@ -23,7 +23,7 @@ class Auth extends BaseController
 
         if ($admin && password_verify($password, $admin['password'])) {
             session()->set('admin' , $admin['username']);
-            return redirect()->to('/dashboard');
+            return redirect()->to('/admin/dashboard');
 
         } else {
             // Login failed
