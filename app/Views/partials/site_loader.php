@@ -99,14 +99,19 @@
       loader.classList.remove('hidden');
     };
 
-    // Hide once page finishes loading.
-    if (document.readyState === 'complete') {
+    // Hide once the DOM is ready so image-heavy pages do not feel stuck.
+    if (document.readyState === 'interactive' || document.readyState === 'complete') {
       hide();
     } else {
-      window.addEventListener('load', hide, {
+      document.addEventListener('DOMContentLoaded', hide, {
         once: true
       });
     }
+
+    // Also hide again on full load as a safety net.
+    window.addEventListener('load', hide, {
+      once: true
+    });
 
     // Show immediately when navigation or form submit happens.
     document.addEventListener('click', function(event) {

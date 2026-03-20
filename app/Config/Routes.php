@@ -45,3 +45,9 @@ $routes->post('/admin/categories/create', 'Categories::create');
 $routes->get('/admin/categories/edit/(:num)', 'Categories::edit/$1');
 $routes->post('/admin/categories/update/(:num)', 'Categories::update/$1');
 $routes->post('/admin/categories/delete/(:num)', 'Categories::delete/$1');
+
+// Dishes management
+$routes->get('/admin/dishes', 'Dishes::list');
+$routes->post('/admin/dishes/create', 'Dishes::create');
+$routes->post('/admin/dishes/update/(:num)', 'Dishes::update/$1');
+$routes->post('/admin/dishes/delete/(:num)', 'Dishes::delete/$1');
