@@ -30,7 +30,7 @@ class Days extends BaseController
     $model = new Day();
     $days = $model->orderBy('id', 'ASC')->paginate(10);
 
-    return view('/admin/Days/list', [
+    return view('/admin/days/list', [
       'days' => $days,
       'pager' => $model->pager,
       'company_name' => $this->loadCompanyName(),
