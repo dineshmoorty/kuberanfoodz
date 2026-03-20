@@ -193,7 +193,7 @@ foreach ($companies as $company) {
 
             <div class="col-md-4">
               <label for="role_id" class="form-label">Role</label>
-              <select class="form-select" id="role_id" name="role_id" required>
+              <select class="form-select" id="role_id" name="role_id" >
                 <option value="">Select role</option>
                 <?php foreach ($roles as $role): ?>
                   <?php if (($role['slug'] ?? '') === 'admin') continue; ?>

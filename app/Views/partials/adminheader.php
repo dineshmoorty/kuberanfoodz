@@ -11,7 +11,7 @@
 
   <style>
     :root {
-      --admin-bg: #84994F;
+      --admin-bg: #7d8f43;
       --admin-text: #ffffff;
       --admin-muted: rgba(255, 255, 255, 0.9);
       --admin-hover: rgba(255, 255, 255, 0.20);
@@ -84,7 +84,7 @@
   </style>
 </head>
 
-<body>
+<body >
   <?php
   $currentPath = uri_string();
   $isActive = function (string $path) use ($currentPath) {
