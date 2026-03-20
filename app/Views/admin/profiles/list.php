@@ -181,7 +181,7 @@ foreach ($companies as $company) {
               <input type="text" class="form-control" id="name" name="name" value="<?= esc(old('name')) ?>" required>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-6">
               <label for="company_id" class="form-label">Company</label>
               <select class="form-select" id="company_id" name="company_id" required>
                 <option value="">Select company</option>
@@ -191,9 +191,9 @@ foreach ($companies as $company) {
               </select>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-6">
               <label for="role_id" class="form-label">Role</label>
-              <select class="form-select" id="role_id" name="role_id" >
+              <select class="form-select" id="role_id" name="role_id" required>
                 <option value="">Select role</option>
                 <?php foreach ($roles as $role): ?>
                   <?php if (($role['slug'] ?? '') === 'admin') continue; ?>
@@ -202,7 +202,7 @@ foreach ($companies as $company) {
               </select>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-6">
               <label for="mobile" class="form-label">Mobile</label>
               <input type="text" class="form-control" id="mobile" name="mobile" maxlength="10" inputmode="numeric" value="<?= esc(old('mobile')) ?>">
             </div>
@@ -226,12 +226,12 @@ foreach ($companies as $company) {
               <input type="password" class="form-control" id="current_password" name="current_password">
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-6">
               <label for="new_password" class="form-label" id="newPasswordLabel">Password</label>
               <input type="password" class="form-control" id="new_password" name="new_password">
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-6">
               <label for="confirm_password" class="form-label">Confirm Password</label>
               <input type="password" class="form-control" id="confirm_password" name="confirm_password">
             </div>
